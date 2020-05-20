@@ -16,5 +16,5 @@ class Robot:
             (potential(self.pos + GRADIENT_STEP * np.array([0, 1])) - potential(self.pos)) / GRADIENT_STEP
         ])
 
-        print(gradient)
+        # print(gradient)
         return - gradient
