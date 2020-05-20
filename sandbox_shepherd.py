@@ -37,6 +37,7 @@ uni_barrier_cert = create_unicycle_barrier_certificate()
 # define x initially
 x = r.get_poses()
 r.step()
+si_to_uni_dyn, uni_to_si_states = create_si_to_uni_mapping()
 
 # While the number of robots at the required poses is less
 # than N...
@@ -45,17 +46,19 @@ for iteration in range(ITERATIONS):
 
     # Get poses of agents
     x = r.get_poses()
+    x_si = uni_to_si_states(x)
 
-    for i in range(x.shape[1]):
-        (sheeps + shepherds)[i].pos = x[:2, i].T
+    for i in range(x_si.shape[1]):
+        (sheeps + shepherds)[i].pos = x_si[:2, i].T
 
     dxu = np.zeros((2, N))
-    for i in range(x.shape[1]):
+    for i in range(x_si.shape[1]):
         dxu[:, i] = (sheeps + shepherds)[i].get_control(sheeps, shepherds).T
 
     # Create safe control inputs (i.e., no collisions)
     dxu = uni_barrier_cert(dxu, x)
 
+    dxu = si_to_uni_dyn(dxu, x)
     # Set the velocities
     r.set_velocities(np.arange(N), dxu)
 
