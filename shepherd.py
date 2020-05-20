@@ -21,7 +21,7 @@ class Shepherd(Robot):
         return SPEED_MULTIPLIER * self.get_potential_direction(potential)
 
     def to_shepherd_potential(self, location, shepherds):
-        distances = np.array([np.linalg.norm(location - shepherd.pos[:2]) for shepherd in shepherds])
+        distances = np.array([np.linalg.norm(location - shepherd.pos[:2]) for shepherd in shepherds if shepherd != self])
         # distances = np.apply_along_axis(lambda sheep: np.linalg.norm(location - sheep.pos[:2]), axis=0, arr=sheeps)
         potentials = REPULSIVE_CONSTANT * np.exp(-distances)
 
