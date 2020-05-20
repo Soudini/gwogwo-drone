@@ -34,11 +34,11 @@ def plot_potential(potential):
 
 if __name__ == "__main__":
     sheeps = [Sheep([0.01, 0]), Sheep([0.01, 1]), Sheep([1.12, 0.29])]
-    shepered = Shepherd([1, 0], len(sheeps))
+    shepereds = [Shepherd([1, 1.4]), Shepherd([1.7, 0])]
 
     # potential = lambda pos: shepered.to_sheep_potential(pos, sheeps)
     # potential = lambda pos: shepered.line_distance(pos, np. zeros(2), np.array((0, 1)))
     # potential = lambda pos: shepered.to_sheep_potential(pos, sheeps)
-    potential = shepered.get_potential(sheeps, [shepered])
+    potential = shepereds[0].get_potential(sheeps, shepereds)
 
     plot_potential(potential)

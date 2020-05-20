@@ -2,18 +2,18 @@ from robot import Robot
 import numpy as np
 from math import exp, log
 
-D_STAR = 0.1  # distance to sheeps
+D_STAR = 0.2  # distance to sheeps
 ALPHA = D_STAR**2  # for repulsive potential towards sheep
 BETA = exp(D_STAR)  # for repulsive potential towards sheep links
 
-REPULSIVE_CONSTANT = 5*ALPHA  # between shepherds
-SPEED_MULTIPLIER = 10  # for the speed command
+REPULSIVE_CONSTANT = 10*ALPHA  # between shepherds
+COVERAGE_DIST = 10*D_STAR
+SPEED_MULTIPLIER = 0.1 # for the speed command
 
 
 class Shepherd(Robot):
-    def __init__(self, pos=[0, 0], sheep_number=None):
+    def __init__(self, pos=[0, 0]):
         super().__init__(pos)
-        self.sheep_number = sheep_number
 
     def get_control(self, sheeps, shepherds):
         """returns dxu for the robot in numpy array formated as [x,y]"""
@@ -29,11 +29,10 @@ class Shepherd(Robot):
         return potential
 
     def to_shepherd_potential(self, location, shepherds):
-        distances = np.array([np.linalg.norm(location - shepherd.pos[:2]) for shepherd in shepherds if shepherd != self])
+        distance = np.min(np.array([np.linalg.norm(location - shepherd.pos[:2]) for shepherd in shepherds if shepherd != self]))
         # distances = np.apply_along_axis(lambda sheep: np.linalg.norm(location - sheep.pos[:2]), axis=0, arr=sheeps)
-        potentials = REPULSIVE_CONSTANT / distances
-
-        return np.sum(potentials)
+        potential = REPULSIVE_CONSTANT / distance + REPULSIVE_CONSTANT * exp(-distance/COVERAGE_DIST)
+        return potential
 
     def to_sheep_potential(self, location, sheeps):
         # distances = np.array([np.linalg.norm(location - sheep.pos) for sheep in sheeps])
