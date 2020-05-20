@@ -5,7 +5,7 @@ from math import exp
 D_STAR = 0.5  # distance to sheeps
 ALPHA = exp(D_STAR)
 
-REPULSIVE_CONSTANT = 1  # between shepherds
+REPULSIVE_CONSTANT = 0.5  # between shepherds
 SPEED_MULTIPLIER = 10  # for the speed comand
 
 
@@ -15,8 +15,8 @@ class Shepherd(Robot):
 
     def get_control(self, sheeps, shepherds):
         """returns dxu for the robot in numpy array formated as [x,y]"""
-        # potential = lambda x: self.to_sheeps_potential(x, sheeps) + self.to_shepherd_potential(x, shepherds)
-        potential = lambda x: self.to_sheeps_potential(x, sheeps)
+        potential = lambda x: self.to_sheeps_potential(x, sheeps) + self.to_shepherd_potential(x, shepherds)
+        # potential = lambda x: self.to_sheeps_potential(x, sheeps)
         # potential = lambda x: 1
         return SPEED_MULTIPLIER * self.get_potential_direction(potential)
 
