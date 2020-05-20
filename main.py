@@ -42,7 +42,7 @@ for iteration in range(ITERATIONS):
     x = r.get_poses()
 
     for i in range(x.shape[1]):
-        (sheeps + shepherds)[i].pos = x[:, i].T
+        (sheeps + shepherds)[i].pos = x[:2, i].T
 
     dxu = np.zeros((2, N))
     for i in range(x.shape[1]):
