@@ -12,9 +12,9 @@ class Shepherd(Robot):
     def __init__(self, pos=[0, 0]):
         super().__init__(pos)
 
-    def get_control(self, sheeps, sheperds):
+    def get_control(self, sheeps, shepherds):
         """returns dxu for the robot in numpy array formated as [x,y]"""
-        potential = lambda x: self.to_sheeps_potential(x, sheeps)
+        potential = lambda x: self.to_sheeps_potential(x, sheeps) + self.to_shepherd_potential(x, shepherds)
         return self.get_potential_direction(potential)
 
     def to_shepherd_potential(self, location, shepherds):
