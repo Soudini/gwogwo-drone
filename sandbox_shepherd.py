@@ -29,7 +29,7 @@ initial_conditions = np.array(
 
 
 r = robotarium.Robotarium(number_of_robots=N, show_figure=True,
-                          initial_conditions=initial_conditions, sim_in_real_time=True)
+                          initial_conditions=initial_conditions, sim_in_real_time=True, number_of_shepherds = N_SHEPHERD)
 
 # Create barrier certificates to avoid collision
 uni_barrier_cert = create_unicycle_barrier_certificate()
