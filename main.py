@@ -12,7 +12,13 @@ import numpy as np
 import time
 
 # Instantiate Robotarium object
-N = 5
+N_SHEEP = 3
+N_SHEPHERD = 2
+N = N_SHEEP + N_SHEPHERD
+
+sheeps = [Sheep() for _ in range(N_SHEEP)]
+shepherds = [Shepherd() for _ in range(N_SHEPHERD)]
+
 initial_conditions = np.array(np.mat('1 0.5 -0.5 0 0.28; 0.8 -0.3 -0.75 0.1 0.34; 0 0 0 0 0'))
 r = robotarium.Robotarium(number_of_robots=N, show_figure=True, initial_conditions=initial_conditions,sim_in_real_time=True)
 
@@ -35,6 +41,9 @@ while (np.size(at_pose(x, goal_points)) != N):
 
     # Get poses of agents
     x = r.get_poses()
+
+    for i in range(x.shape[1]):
+        (sheeps + shepherds)[i].pos = x[:,i].T
     # Create unicycle control inputs
     dxu = unicycle_pose_controller(x, goal_points)
 
