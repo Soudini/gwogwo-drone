@@ -6,4 +6,6 @@ class Shepherd(Robot):
         super().__init__(pos)
     
     def get_control(self, sheeps, sheperds):
+        """returns dxu for the robot in numpy array formated as [x,y]"""
+
         pass
