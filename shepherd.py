@@ -28,7 +28,8 @@ class Shepherd(Robot):
     def to_sheeps_potential(self, location, sheeps):
         distances = np.array([np.linalg.norm(location - sheep.pos) for sheep in sheeps])
         # distances = np.apply_along_axis(lambda sheep: np.linalg.norm(location - sheep.pos), axis=0, arr=sheeps)
-        potentials = distances + alpha * np.exp(-distances)
+        # potentials = distances + alpha * np.exp(-distances)
+        potentials = distances
 
         print(potentials)
 
