@@ -13,7 +13,7 @@ import time
 
 # Instantiate Robotarium object
 N_SHEEP = 1
-N_SHEPHERD = 1
+N_SHEPHERD = 3
 N = N_SHEEP + N_SHEPHERD
 
 ITERATIONS = 500
@@ -25,7 +25,7 @@ shepherds = [Shepherd() for _ in range(N_SHEPHERD)]
 #     np.mat('1 0.5 -0.5 0 0.28; 0.8 -0.3 -0.75 0.1 0.34; 0 0 0 0 0'))
 
 initial_conditions = np.array(
-    np.mat('1 0.5; 0.8 -0.3; 0 0'))
+    np.mat('0 1 1 0.5; 0 -0.5 0.8 -0.3; 0 0 0 0'))
 
 
 r = robotarium.Robotarium(number_of_robots=N, show_figure=True,
