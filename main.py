@@ -35,7 +35,6 @@ while (np.size(at_pose(x, goal_points)) != N):
 
     # Get poses of agents
     x = r.get_poses()
-
     # Create unicycle control inputs
     dxu = unicycle_pose_controller(x, goal_points)
 
