@@ -16,17 +16,13 @@ N_SHEEP = 3
 N_SHEPHERD = 2
 N = N_SHEEP + N_SHEPHERD
 
+ITERATIONS = 500
+
 sheeps = [Sheep() for _ in range(N_SHEEP)]
 shepherds = [Shepherd() for _ in range(N_SHEPHERD)]
 
 initial_conditions = np.array(np.mat('1 0.5 -0.5 0 0.28; 0.8 -0.3 -0.75 0.1 0.34; 0 0 0 0 0'))
 r = robotarium.Robotarium(number_of_robots=N, show_figure=True, initial_conditions=initial_conditions,sim_in_real_time=True)
-
-# Define goal points by removing orientation from poses
-goal_points = generate_initial_conditions(N)
-
-# Create unicycle pose controller
-unicycle_pose_controller = create_clf_unicycle_pose_controller()
 
 # Create barrier certificates to avoid collision
 uni_barrier_cert = create_unicycle_barrier_certificate()
@@ -37,14 +33,15 @@ r.step()
 
 # While the number of robots at the required poses is less
 # than N...
-while (np.size(at_pose(x, goal_points)) != N):
+
+for iteration in range(ITERATIONS):
 
     # Get poses of agents
     x = r.get_poses()
 
     for i in range(x.shape[1]):
         (sheeps + shepherds)[i].pos = x[:,i].T
-    # Create unicycle control inputs
+
     dxu = np.zeros((2,N))
     for i in range(x.shape[1]):
         dxu[:,i] = (sheeps + shepherds)[i].get_control(sheeps, shepherds).T
