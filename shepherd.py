@@ -38,7 +38,7 @@ class Shepherd(Robot):
         return np.sum(potentials)
 
     def to_sheep_line_potential(self, location, sheeps):
-        pass
+        return np.sum([line_potential(location, sheeps[i].pos, sheeps[j].pos) for j in range(len(sheeps)) for i in range(j+1, len(sheeps))])
 
     def line_potential(self, location, point_1, point_2):
         u = point_2 - point_1
