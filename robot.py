@@ -1,6 +1,8 @@
 import numpy as np
 
-GRADIENT_STEP = 0.1
+GRADIENT_STEP = 0.0001
+
+
 class Robot:
     def __init__(self, pos=[0, 0]):
         self.pos = pos
@@ -10,7 +12,9 @@ class Robot:
 
     def get_potential_direction(self, potential):
         gradient = np.array([
-                potential(self.pos + GRADIENT_STEP * np.array([1,0])) - potential(self.pos),
-                potential(self.pos + GRADIENT_STEP * np.array([0,1])) - potential(self.pos)
-            ])
-        return gradient
+            (potential(self.pos + GRADIENT_STEP * np.array([1, 0])) - potential(self.pos)) / GRADIENT_STEP,
+            (potential(self.pos + GRADIENT_STEP * np.array([0, 1])) - potential(self.pos)) / GRADIENT_STEP
+        ])
+
+        print(gradient)
+        return - gradient
