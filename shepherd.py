@@ -15,7 +15,7 @@ class Shepherd(Robot):
 
     def get_control(self, sheeps, shepherds):
         """returns dxu for the robot in numpy array formated as [x,y]"""
-        potential = lambda x: self.to_sheeps_potential(x, sheeps) + self.to_shepherd_potential(x, shepherds)
+        potential = lambda x: self.to_sheep_potential(x, sheeps) + self.to_shepherd_potential(x, shepherds)
         # potential = lambda x: self.to_sheeps_potential(x, sheeps)
         # potential = lambda x: 1
         return SPEED_MULTIPLIER * self.get_potential_direction(potential)
@@ -27,7 +27,7 @@ class Shepherd(Robot):
 
         return np.sum(potentials)
 
-    def to_sheeps_potential(self, location, sheeps):
+    def to_sheep_potential(self, location, sheeps):
         distances = np.array([np.linalg.norm(location - sheep.pos) for sheep in sheeps])
         # distances = np.apply_along_axis(lambda sheep: np.linalg.norm(location - sheep.pos), axis=0, arr=sheeps)
         potentials = distances + ALPHA * np.exp(-distances)
@@ -37,7 +37,7 @@ class Shepherd(Robot):
 
         return np.sum(potentials)
 
-    def to_sheeps_line_potential(self, location, sheeps):
+    def to_sheep_line_potential(self, location, sheeps):
         pass
 
     def line_potential(self, point_1, point_2):
