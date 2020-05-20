@@ -1,3 +1,5 @@
-class Shepherd:
+from robot import Robot
+class Shepherd(Robot):
     def __init__(self):
-        pass        
+        super().__init__()
+        
