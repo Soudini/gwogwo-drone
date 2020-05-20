@@ -40,5 +40,11 @@ class Shepherd(Robot):
     def to_sheep_line_potential(self, location, sheeps):
         pass
 
-    def line_potential(self, point_1, point_2):
-        pass
+    def line_potential(self, location, point_1, point_2):
+        u = point_2 - point_1
+        n = u/np.linalg.norm(u)
+
+        v1 = location - point_1
+        v2 = location - point_2
+
+
