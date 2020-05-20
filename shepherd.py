@@ -1,5 +1,5 @@
 from robot import Robot
-
+import numpy as np
 
 class Shepherd(Robot):
     def __init__(self,  pos = [0,0,0]):
