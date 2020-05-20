@@ -5,7 +5,7 @@ from math import exp
 D_STAR = 0.5  # distance to sheeps
 ALPHA = exp(D_STAR)
 
-REPULSIVE_CONSTANT = 0.5  # between shepherds
+REPULSIVE_CONSTANT = 0.1  # between shepherds
 SPEED_MULTIPLIER = 10  # for the speed comand
 
 
@@ -23,7 +23,7 @@ class Shepherd(Robot):
     def to_shepherd_potential(self, location, shepherds):
         distances = np.array([np.linalg.norm(location - shepherd.pos[:2]) for shepherd in shepherds if shepherd != self])
         # distances = np.apply_along_axis(lambda sheep: np.linalg.norm(location - sheep.pos[:2]), axis=0, arr=sheeps)
-        potentials = REPULSIVE_CONSTANT * np.exp(-distances)
+        potentials = REPULSIVE_CONSTANT / distances
 
         return np.sum(potentials)
 
@@ -33,6 +33,12 @@ class Shepherd(Robot):
         potentials = distances + ALPHA * np.exp(-distances)
         # potentials = distances
 
-        print(potentials)
+        # print(potentials)
 
         return np.sum(potentials)
+
+    def to_sheeps_line_potential(self, location, sheeps):
+        pass
+
+    def line_potential(self, point_1, point_2):
+        pass
