@@ -9,4 +9,8 @@ class Robot:
         return np.linalg.norm(self.pos[:2] - target.pos[:2])
 
     def get_potential_direction(self, potential):
-        pass
+        gradient = np.array([
+                potential(self.pos + GRADIENT_STEP * np.array([1,0])),
+                potential(self.pos + GRADIENT_STEP * np.array([0,1]))
+            ])
+        return gradient
