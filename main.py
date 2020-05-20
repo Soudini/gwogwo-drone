@@ -48,7 +48,6 @@ while (np.size(at_pose(x, goal_points)) != N):
     dxu = np.zeros((2,N))
     for i in range(x.shape[1]):
         dxu[:,i] = (sheeps + shepherds)[i].get_control(sheeps, shepherds).T
-    dxu = unicycle_pose_controller(x, goal_points)
 
     # Create safe control inputs (i.e., no collisions)
     dxu = uni_barrier_cert(dxu, x)
