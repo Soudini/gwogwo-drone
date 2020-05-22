@@ -6,7 +6,7 @@ from rps.utilities.controllers import *
 
 
 from sheep import Sheep
-from shepherd import Shepherd
+from shepherd import Shepherd, NewShepherd
 
 import numpy as np
 import time
@@ -19,7 +19,9 @@ N = N_SHEEP + N_SHEPHERD
 ITERATIONS = 500
 
 sheeps = [Sheep() for _ in range(N_SHEEP)]
-shepherds = [Shepherd() for _ in range(N_SHEPHERD)]
+shepherds = [NewShepherd() for _ in range(N_SHEPHERD)]
+# shepherds = [Shepherd() for _ in range(N_SHEPHERD)]
+
 
 # initial_conditions = np.array(
 #     np.mat('1 0.5 -0.5 0 0.28; 0.8 -0.3 -0.75 0.1 0.34; 0 0 0 0 0'))

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 import numpy as np
 from sheep import Sheep
-from shepherd import Shepherd
+from shepherd import Shepherd, NewShepherd
 
 # This import registers the 3D projection, but is otherwise unused.
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
@@ -16,8 +16,8 @@ def plot_potential(potential):
     ax = fig.add_subplot(1, 1, 1, projection='3d')
 
     # plot a 3D surface like in the example mplot3d/surface3d_demo
-    X = np.arange(-2, 2, 0.05)
-    Y = np.arange(-2, 2, 0.05)
+    X = np.arange(-2.5, 2.5, 0.1)
+    Y = np.arange(-2.5, 2.5, 0.1)
     X, Y = np.meshgrid(X, Y)
 
     # POTENTIAL
@@ -34,8 +34,9 @@ def plot_potential(potential):
 
 if __name__ == "__main__":
     sheeps = [Sheep([0.01, 0]), Sheep([0.01, 1]), Sheep([1.12, 0.29])]
-    shepereds = [Shepherd([1, 1.4]), Shepherd([1.7, 0])]
+    shepereds = [NewShepherd([1, 1.4]), Shepherd([1.7, 0]), Shepherd([-1, -0.5])]
 
+    # potential = lambda pos: np.linalg.norm(pos)
     # potential = lambda pos: shepered.to_sheep_potential(pos, sheeps)
     # potential = lambda pos: shepered.line_distance(pos, np. zeros(2), np.array((0, 1)))
     # potential = lambda pos: shepered.to_sheep_potential(pos, sheeps)
