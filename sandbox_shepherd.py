@@ -12,26 +12,42 @@ import numpy as np
 import time
 
 # Instantiate Robotarium object
-N_SHEEP = 2
-N_SHEPHERD = 4
+N_SHEEP = 1
+N_SHEPHERD = 3
 N = N_SHEEP + N_SHEPHERD
 
 ITERATIONS = 500
 
 sheeps = [Sheep() for _ in range(N_SHEEP)]
 shepherds = [NewShepherd() for _ in range(N_SHEPHERD)]
-# shepherds = [Shepherd() for _ in range(N_SHEPHERD)]
-
 
 # initial_conditions = np.array(
 #     np.mat('1 0.5 -0.5 0 0.28; 0.8 -0.3 -0.75 0.1 0.34; 0 0 0 0 0'))
 
+# 4
 initial_conditions = np.array(
-    np.mat('0 -0.5 -1 1 1 0.5; 0 0 0.1 -0.5 0.8 -0.3; 0 0 0 0 0 0'))
+    np.mat('0 -0.5 -0.8 0.8; 0 -0.5 0.8 -0.3; 0 0 0 0'))
+
+# 5
+# initial_conditions = np.array(
+#     np.mat('0 0.5 -1 1 1; 0 0 -0.5 0.8 -0.3; 0 0 0 0 0'))
+
+# 6
+# initial_conditions = np.array(
+#     np.mat('0 -0.5 -1 1 1 0.5; 0 0 0.1 -0.5 0.8 -0.7; 0 0 0 0 0 0'))
+
+# 7
+# initial_conditions = np.array(
+#     np.mat('0 -0.25 -0.5 -1 1 1 0.5; 0 0.4 0 0.1 -0.5 0.8 -0.8; 0 0 0 0 0 0 0'))
+
+# initial_conditions = np.array(
+#     np.mat('0 1 0.5; 0 0.8 -0.3; 0 0 0'))
 
 
+# r = robotarium.Robotarium(number_of_robots=N, show_figure=True,
+#                           initial_conditions=initial_conditions, sim_in_real_time=True, number_of_shepherds = N_SHEPHERD)
 r = robotarium.Robotarium(number_of_robots=N, show_figure=True,
-                          initial_conditions=initial_conditions, sim_in_real_time=True, number_of_shepherds = N_SHEPHERD)
+                          initial_conditions=initial_conditions, sim_in_real_time=True)
 
 # Create barrier certificates to avoid collision
 uni_barrier_cert = create_unicycle_barrier_certificate()

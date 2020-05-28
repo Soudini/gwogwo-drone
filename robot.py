@@ -1,6 +1,6 @@
 import numpy as np
 
-GRADIENT_STEP = 0.0001
+GRADIENT_STEP = 0.00001
 
 
 class Robot:
